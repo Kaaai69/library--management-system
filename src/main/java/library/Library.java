@@ -67,6 +67,7 @@ public class Library {
         }
         return result;
     }
+<<<<<<< HEAD
     public void printOperationLog() {
         operationLog.printLog();
     }
@@ -139,3 +140,6 @@ public class Library {
 }
 
 
+=======
+    
+>>>>>>> 91a2bcf (Add Library class structure)
