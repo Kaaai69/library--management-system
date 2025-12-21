@@ -67,5 +67,75 @@ public class Library {
         }
         return result;
     }
+    public void printOperationLog() {
+        operationLog.printLog();
+    }
 
-    
+    public static class OperationLog {
+        private List<LogEntry> entries;
+
+        public OperationLog() {
+            this.entries = new ArrayList<>();
+        }
+
+        public void addEntry(OperationType type, String description) {
+            LogEntry entry = new LogEntry(type, description);
+            entries.add(entry);
+        }
+
+        public List<LogEntry> getEntries() {
+            return new ArrayList<>(entries);
+        }
+
+        public void printLog() {
+            if (entries.isEmpty()) {
+                System.out.println("Журнал операций пуст");
+                return;
+            }
+
+            System.out.println("=== Журнал операций библиотеки ===");
+            for (LogEntry entry : entries) {
+                System.out.println(entry);
+            }
+            System.out.println("===================================");
+        }
+
+        public class LogEntry {
+            private OperationType type;
+            private LocalDateTime timestamp;
+            private String description;
+
+            public LogEntry(OperationType type, String description) {
+                this.type = type;
+                this.timestamp = LocalDateTime.now();
+                this.description = description;
+            }
+
+            public OperationType getType() {
+                return type;
+            }
+
+            public LocalDateTime getTimestamp() {
+                return timestamp;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("[%s] %s - %s",
+                        timestamp.toString(), type, description);
+            }
+        }
+
+        public enum OperationType {
+            ADD_BOOK,
+            BORROW,
+            RETURN
+        }
+    }
+}
+
+
